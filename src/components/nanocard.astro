@@ -1,0 +1,228 @@
+---
+export interface Props {
+    filename?: string;
+    content?: string | string[];
+    modified?: boolean;
+}
+
+const { 
+    filename = "",
+    content = [""],
+    modified = false
+} = Astro.props;
+
+// Helper function to ensure we have arrays
+const contentLines = Array.isArray(content) ? content : content.split('\n');
+---
+
+<div class="nano-container">
+    <!-- Nano title bar -->
+    <div class="nano-header">
+        <div class="nano-title">
+            <span class="nano-version">GNU nano 6.2</span>
+            <span class="nano-filename">{filename}{modified ? " *" : ""}</span>
+        </div>
+    </div>
+    
+    <!-- Nano editor content -->
+    <div class="nano-editor">
+        {contentLines.map((line, index) => {
+            const isLastLine = index === contentLines.length - 1;
+            return (
+                <div class="nano-line">
+                    <span class="line-number">{String(index + 1).padStart(3, ' ')}</span>
+                    <span class="line-content">
+                        {line || ' '}
+                        {isLastLine && <span class="nano-cursor">█</span>}
+                    </span>
+                </div>
+            );
+        })}
+    </div>
+    
+    <!-- Nano bottom bar with shortcuts -->
+    <div class="nano-shortcuts">
+        <div class="shortcut-row">
+            <span class="shortcut">^G</span><span class="shortcut-desc">Help</span>
+            <span class="shortcut">^O</span><span class="shortcut-desc">Write Out</span>
+            <span class="shortcut">^W</span><span class="shortcut-desc">Where Is</span>
+            <span class="shortcut">^K</span><span class="shortcut-desc">Cut</span>
+            <span class="shortcut">^J</span><span class="shortcut-desc">Justify</span>
+            <span class="shortcut">^C</span><span class="shortcut-desc">Location</span>
+        </div>
+        <div class="shortcut-row">
+            <span class="shortcut">^X</span><span class="shortcut-desc">Exit</span>
+            <span class="shortcut">^R</span><span class="shortcut-desc">Read File</span>
+            <span class="shortcut">^\</span><span class="shortcut-desc">Replace</span>
+            <span class="shortcut">^U</span><span class="shortcut-desc">Paste</span>
+            <span class="shortcut">^T</span><span class="shortcut-desc">To Spell</span>
+            <span class="shortcut">^_</span><span class="shortcut-desc">Go To Line</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
+
+    .nano-container {
+        width: 70%;
+        max-width: 800px;
+        margin: 1rem auto;
+        border: 1px solid #333;
+        border-radius: 4px;
+        background-color: #000;
+        color: #fff;
+        font-family: 'Ubuntu Mono', monospace;
+        font-size: 0.85rem;
+        overflow: hidden;
+    }
+
+    .nano-header {
+        background-color: #1a1a1a;
+        border-bottom: 1px solid #333;
+        padding: 0.3rem 0.5rem;
+    }
+
+    .nano-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .nano-version {
+        color: #888;
+        font-size: 0.8rem;
+    }
+
+    .nano-filename {
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .nano-editor {
+        background-color: #000;
+        color: #fff;
+        padding: 0.5rem;
+        min-height: 100px;
+        position: relative;
+        overflow-x: auto;
+    }
+
+    .nano-line {
+        display: flex;
+        line-height: 1.4;
+        min-height: 1.4em;
+    }
+
+    .line-number {
+        color: #555;
+        margin-right: 1rem;
+        user-select: none;
+        flex-shrink: 0;
+    }
+
+    .line-content {
+        flex: 1;
+        white-space: pre;
+    }
+
+    .nano-cursor {
+        color: #fff;
+        background-color: #fff;
+        animation: blink 1s infinite;
+        display: inline;
+        margin-left: 1px;
+    }
+
+    @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+    }
+
+    .nano-shortcuts {
+        background-color: #1a1a1a;
+        border-top: 1px solid #333;
+        padding: 0.3rem 0.5rem;
+        font-size: 0.75rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .shortcut-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.2rem;
+    }
+
+    .shortcut-row:last-child {
+        margin-bottom: 0;
+    }
+
+    .shortcut {
+        color: #fff;
+        font-weight: bold;
+        margin-right: 0.3rem;
+    }
+
+    .shortcut-desc {
+        color: #ccc;
+        margin-right: 1rem;
+    }
+
+    /* Syntax highlighting for bash */
+    .nano-line:first-child .line-content {
+        color: var(--nano-comment-color); /* Shebang */
+    }
+
+    .nano-line .line-content:contains("echo") {
+        color: #4ecdc4; /* Commands */
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        .nano-container {
+            width: 100%;
+            max-width: none;
+            margin: 0.75rem 0;
+        }
+        .nano-header {
+            padding: 0.4rem 0.5rem;
+        }
+        .nano-editor {
+            padding: 0.4rem;
+        }
+        .nano-shortcuts {
+            font-size: 0.7rem;
+        }
+        .shortcut-row {
+            display: inline-flex;
+            gap: 0.75rem;
+            white-space: nowrap;
+            justify-content: flex-start;
+            min-width: max-content;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .nano-container {
+            width: 100%;
+            max-width: none;
+            margin: 0.5rem 0;
+            font-size: 0.8rem;
+        }
+        .nano-shortcuts {
+            font-size: 0.65rem;
+            line-height: 1.2;
+        }
+        .shortcut-row {
+            display: inline-flex;
+            gap: 0.6rem;
+            white-space: nowrap;
+            justify-content: flex-start;
+            min-width: max-content;
+        }
+        .shortcut, .shortcut-desc {
+            margin-right: 0.2rem;
+        }
+    }
+</style>

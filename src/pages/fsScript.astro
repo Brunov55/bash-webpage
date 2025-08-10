@@ -1,0 +1,57 @@
+---
+import Header from "../components/header.astro";
+import Footer from "../components/footer.astro";
+import Aside from "../components/aside.astro";
+import CodeCard from "../components/codecard.astro";
+import "../styles/global.css";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:wght@300&display=swap" rel="stylesheet">
+		<title>First Steps: Scripting - Bash Programming</title>
+	</head>
+	<body>
+		<input type="checkbox" id="toggle-menu" hidden>
+		<Header />
+		<Aside />
+		<main>
+            <section class="home-section">
+                <h1>Scripting: First Steps</h1>
+                <h2>What is a script?</h2>
+                <p>A script is a sequence of commands that are stored in a file and executed by the shell. Scripts are used to automate tasks and create scripts to perform complex operations. It usually starts with a hash-bang telling the OS which interpreter to use.</p>
+                <h2>Selecting a directory for your scripts</h2>
+                <p>You need to know that when the shell is given the name of a command to execute, it looks for that name in the directories listed in the <span class="bash-term">PATH</span> environment variable. If the command is not found in any of those directories, the shell will return an error. This is a typical value for the <span class="bash-term">PATH</span> variable:</p>
+                <!-- Codecard for the echo $PATH command -->
+                <CodeCard command={['echo $PATH']} output={['/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin']} />
+                <p>If a program isn't in your <span class="bash-term">PATH</span>, you must invoke it with a pathname. Use an absolute path from the filesystem root (e.g., <span class="bash-dir">/home/chris/bin/hw</span>) or a relative path from your current working directory (e.g., <span class="bash-dir">bin/hw</span>). Executables are commonly kept in directories named <span class="bash-term">bin</span>; user-specific programs typically live in <span class="bash-dir">$HOME/bin</span>.</p>
+                <ul>
+                    <li>Create a directory for your scripts: <span class="bash-dir">mkdir bin</span>, (mkdir stands for "<b>m</b>a<b>k</b>e <b>dir</b>ectory")</li>
+                    <li>List the contents of the directory to make sure it was created: <span class="bash-dir">ls</span>, (ls stands for "<b>l</b>i<b>s</b>t")</li>
+                    <li>Now that it exists, it must be added to the <span class="bash-term">PATH</span> variable: <span class="bash-dir">PATH=$PATH:$HOME/bin</span>, (PATH stands for "<b>p</b>ath")</li>
+                </ul>
+                <!-- Codecard for the mkdir, ls, echo $PATH, PATH=$PATH:$HOME/bin commands -->
+                <CodeCard command={['mkdir bin', 'ls', 'echo $PATH', 'PATH=$PATH:$HOME/bin']} output={['', 'bin Desktop Downloads Documents Music Pictures Public Videos', '/<usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:$HOME/bin', '']} />
+                <h2>Creating a script and running it</h2>
+                <p>Ordinarily you’d open a text editor to write your program. For a tiny script like this, though, you don’t need an editor, you can create the file right from the command line using output redirection:</p>
+                <!-- Codecard for the hw script -->
+                <CodeCard command={['echo echo Hello, World! > bin/hw']} output={['']} />
+                <p>The greater-than sign (&gt;) tells the shell to send a command's standard output to the specified file instead of the terminal, overwriting that file if it already exists, now you need to:</p>
+                <ul>
+                    <li>Make the script executable: <span class="bash-dir">chmod +x bin/hw</span></li>
+                    <li>Run the script: <span class="bash-dir">bin/hw</span> or <span class="bash-dir">hw</span></li>
+                </ul>
+                <!-- Codecard for the chmod +x bin/hw, bin/hw, hw commands -->
+                <CodeCard command={['chmod +x bin/hw', 'bin/hw', 'hw']} output={['','Hello, World!', 'Hello, World!']} />
+                <p>The <span class="bash-term">chmod</span> command is used to change the permissions of a file, <span class="bash-term">chmod</span> stands for "<b>ch</b>ange <b>mod</b>e". The <span class="bash-term">+x</span> option gives execute permission to the user, group, and others. The <span class="bash-term">bin/hw</span> is the path to the script.</p>
+            </section>
+		</main>
+        <Footer />
+	</body>
+</html>

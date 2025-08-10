@@ -1,0 +1,193 @@
+---
+export interface Props {
+    command?: string | string[];
+    output?: string | string[];
+}
+
+const { 
+    command = "",
+    output = ""
+} = Astro.props;
+
+// Helper function to ensure we have arrays
+const commandLines = Array.isArray(command) ? command : [command].filter(Boolean);
+const outputLines = Array.isArray(output) ? output : [output].filter(Boolean);
+---
+
+<div class="terminal-container">
+    <!-- Terminal title bar -->
+    <div class="terminal-header">
+        <div class="terminal-controls">
+            <span class="control-btn close"></span>
+            <span class="control-btn minimize"></span>
+            <span class="control-btn maximize"></span>
+        </div>
+        <div class="terminal-title">Terminal</div>
+    </div>
+    
+    <!-- Terminal content -->
+    <div class="terminal-content">
+        {commandLines.map((cmd, index) => (
+            <>
+                <div class="terminal-line">
+                    <span class="terminal-user">User@Ubuntu</span>:<span class="terminal-path">~</span><span class="terminal-prompt">$&nbsp;</span><span class="terminal-command">{cmd}</span>
+                </div>
+                {outputLines[index] && (
+                    <div class="terminal-output">
+                        {outputLines[index]}
+                    </div>
+                )}
+            </>
+        ))}
+        <div class="terminal-line">
+            <span class="terminal-user">User@Ubuntu</span>:<span class="terminal-path">~</span><span class="terminal-prompt">$&nbsp;</span><span class="terminal-cursor">█</span>
+        </div>
+    </div>
+</div>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
+
+    .terminal-container {
+        width: 70%;
+        max-width: 800px;
+        margin: 1rem auto;
+        border: 1px solid var(--terminal-border);
+        border-radius: 8px;
+        background-color: var(--terminal-background);
+        color: var(--terminal-text);
+        font-family: 'Ubuntu Mono', monospace;
+        font-size: 0.9rem;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .terminal-header {
+        background-color: var(--terminal-header-background);
+        border-bottom: 1px solid var(--terminal-border);
+        padding: 0.5rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .terminal-controls {
+        display: flex;
+        gap: 0.5rem;
+        position: absolute;
+        left: 1rem;
+    }
+
+    .control-btn {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .control-btn.close {
+        background-color: #ff5f56;
+    }
+
+    .control-btn.minimize {
+        background-color: #ffbd2e;
+    }
+
+    .control-btn.maximize {
+        background-color: #27ca3f;
+    }
+
+    .terminal-title {
+        color: var(--terminal-text);
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .terminal-content {
+        background-color: var(--terminal-background);
+        padding: 1rem;
+        min-height: 70px;
+        line-height: 1.4;
+    }
+
+    .terminal-line {
+        margin-bottom: 0.2rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .terminal-output {
+        color: var(--terminal-output);
+        margin-bottom: 0.4rem;
+        margin-left: 0;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+
+    .terminal-user {
+        color: var(--terminal-user);
+        font-weight: bold;
+    }
+
+    .terminal-path {
+        color: var(--terminal-path);
+        font-weight: bold;
+    }
+
+    .terminal-prompt {
+        color: var(--terminal-prompt);
+        font-weight: bold;
+    }
+
+    .terminal-command {
+        color: var(--terminal-text);
+    }
+
+    .terminal-cursor {
+        color: var(--terminal-text);
+        background-color: var(--terminal-text);
+        animation: blink 1s infinite;
+        margin-left: 2px;
+    }
+
+    @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+        .terminal-container {
+            width: 100%;
+            max-width: none;
+            margin: 0.75rem 0;
+        }
+
+        .terminal-header {
+            padding: 0.4rem 0.5rem;
+        }
+
+        .terminal-content {
+            padding: 0.5rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .terminal-container {
+            width: 100%;
+            max-width: none;
+            margin: 0.5rem 0;
+            font-size: 0.8rem;
+        }
+
+        .control-btn {
+            width: 10px;
+            height: 10px;
+        }
+
+        .terminal-title {
+            font-size: 0.75rem;
+        }
+    }
+</style>

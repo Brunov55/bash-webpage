@@ -1,0 +1,87 @@
+---
+import Header from "../components/header.astro";
+import Footer from "../components/footer.astro";
+import Aside from "../components/aside.astro";
+import CodeCard from "../components/codecard.astro";
+import NanoCard from "../components/nanocard.astro";
+import "../styles/global.css";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:wght@300&display=swap" rel="stylesheet">
+		<title>First Steps: Scripting - Bash Programming</title>
+	</head>
+	<body>
+		<input type="checkbox" id="toggle-menu" hidden>
+		<Header />
+		<Aside />
+		<main>
+            <section class="home-section">
+                <h1>Nano: Text editor</h1>
+                <h2>What is Nano?</h2>
+                <p>Nano is a small, friendly, terminal-based text editor from the GNU project. It’s popular because it shows its shortcuts at the bottom of the screen, so you can edit files without memorizing a ton of commands. </p>
+                <h2>What you use it for</h2>
+                <ul>
+                    <li>Creating and editing config files (e.g., /etc/…), scripts, notes.</li>
+                    <li>Editing small files (e.g., README, license).</li>
+                    <li>Editing files in a terminal (e.g., ~/.bashrc).</li>
+                    <li>Quick edits over SSH on servers.</li>
+                    <li>A gentle on-ramp before moving to heavier editors.</li>
+                </ul>
+                <h2>How to use Nano?</h2>
+                <p>To use Nano, you need to open the terminal and type <span class="bash-term">nano</span> followed by the name of the file you want to edit. For example, to edit the file <span class="bash-dir">hello.sh</span>, you would type <span class="bash-term">nano hello.sh</span>.</p>
+                <CodeCard command={['nano hello.sh']} output={['']} />
+                <p>The <span class="bash-term">nano</span> text editor will open in the same terminal window. You can start typing your script right away.</p>
+                <NanoCard 
+                    filename="hello.sh"
+                    content={['']}
+                    modified={false}
+                />
+                <h2>Nano commands</h2>
+                <ul>
+                    <li><strong>Ctrl + G:</strong> Help</li>
+                    <li><strong>Ctrl + X:</strong> Exit the editor</li>
+                    <li><strong>Ctrl + O:</strong> Save the file</li>
+                    <li><strong>Ctrl + R:</strong> Redo the last operation</li>
+                    <li><strong>Ctrl + W:</strong> Search for a word</li>
+                    <li><strong>Ctrl + \:</strong> Replace (Replace the selected text)</li>
+                    <li><strong>Ctrl + K:</strong> Cut the selected text</li>
+                    <li><strong>Ctrl + U:</strong> Paste the cut text</li>
+                    <li><strong>Ctrl + J:</strong> Justify the text</li>
+                    <li><strong>Ctrl + T:</strong> To Spell (Spell check the text)</li>
+                    <li><strong>Ctrl + C:</strong> Location (Go to the current line)</li>
+                    <li><strong>Ctrl + _:</strong> Go To Line (Go to the line number)</li>
+                </ul>
+                <h2>Example of a Nano script</h2>
+                <p>The following script will print "Hello, World!" to the terminal.</p>
+                <NanoCard 
+                    filename="hello.sh"
+                    content={['#!/usr/bin/env bash', '', 'echo "Hello, World!"']}
+                    modified={false}
+                />
+                <p>Now just save the file and exit the editor. The <span class="bash-dir">#!/usr/bin/env bash</span> is a <i>hash-bang</i> line. It tells the OS: “run this file with Bash,” but first use <span class="bash-term">env</span> to find Bash in the user’s <span class="bash-term">PATH</span>.</p>
+                <p>What it does, step by step:</p>
+                <ol>
+                    <li>The <span class="bash-dir">#!/usr/bin/env</span> tells the OS to use the <span class="bash-term">env</span> command to find Bash in the user’s <span class="bash-term">PATH</span>.</li>
+                    <li>The <span class="bash-dir">bash</span> tells the OS to run the script with Bash.</li>
+                    <li>The <span class="bash-term">echo "Hello, World!"</span> tells the OS to print "Hello, World!" to the terminal.</li>
+                </ol>
+                <p>Why use this instead of <span class="bash-dir">#!/bin/bash</span>?</p>
+                <ul>
+                    <li><strong>Portability:</strong> Bash might live in different places (<span class="bash-dir">/bin/bash</span>, <span class="bash-dir">/usr/local/bin/bash</span>, <span class="bash-dir">/opt/homebrew/bin/bash</span> on macOS with Homebrew). Using <span class="bash-term">env</span> finds whichever one your shell would run.</li>
+                    <li><strong>Environment-aware:</strong> Respects virtual environments or custom PATHs.</li>
+                </ul>
+                <h2>Now try to run your script</h2>
+                <CodeCard command={['nano hello.sh', 'chmod +x hello.sh', './hello.sh']} output={['', '', 'Hello, World!']} />
+            </section>
+        </main>
+        <Footer />
+	</body>
+</html>

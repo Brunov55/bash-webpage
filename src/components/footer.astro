@@ -1,0 +1,45 @@
+<footer>
+    <p>Developed by <a href="https://github.com/brunov55">Bruno Victoria</a>  -  2025  -  All rights reserved</p>
+</footer>
+
+<style>
+    footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        background-color: var(--nav-background-color);
+        color: var(--nav-text-color);
+        font-family: var(--body-font);
+        font-size: 1.2rem;
+        position: fixed;
+        bottom: 0;
+        left: calc(var(--aside-width) + 5px);
+        right: 0;
+        height: 40px;
+        z-index: 1;
+        box-shadow: 0px 2px 4px 3px rgba(252, 251, 251, 0.5);
+    }
+
+    footer p {
+        margin: 0;
+        padding: 0;
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: var(--nav-text-color);
+    }
+
+    footer p a {
+        color: var(--nav-link-color);
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    footer p a:hover {
+        color: var(--nav-link-hover-color);
+    }
+
+    footer p a:active {
+        color: var(--nav-link-active-color);
+    }
+</style>

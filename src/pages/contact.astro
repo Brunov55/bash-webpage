@@ -1,0 +1,44 @@
+---
+import Header from "../components/header.astro";
+import Footer from "../components/footer.astro";
+import "../styles/global.css";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:wght@300&display=swap" rel="stylesheet">
+		<title>Contact - Bash Programming</title>
+	</head>
+	<body>
+		<input type="checkbox" id="toggle-menu" hidden>
+		<Header showMenu={false} />
+		<main>
+			<section class="contact-section">
+				<h1>Contact</h1>
+				<div class="social-links">
+					<h2>Connect with me:</h2>
+                    <img src="/profile-pic.jpg" alt="Profile Picture" class="profile-picture">
+					<a href="https://personal-portfolio-dusky-delta-71.vercel.app/" class="social-link" target="_blank">
+						<img src="/personal-page-svgrepo.svg" alt="Personal Portfolio" class="social-icon">
+						Portfolio
+					</a>
+					<a href="https://github.com/Brunov55" class="social-link" target="_blank">
+						<img src="/github.png" alt="Github" class="social-icon">
+						Github
+					</a>
+					<a href="https://www.linkedin.com/in/brunov55/" class="social-link" target="_blank">
+						<img src="/linkedin.png" alt="LinkedIn" class="social-icon">
+						LinkedIn
+					</a>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

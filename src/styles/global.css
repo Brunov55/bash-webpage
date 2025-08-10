@@ -1,0 +1,894 @@
+:root {
+	/* nav styles */
+	--nav-background-color: hsl(220, 10%, 13%);
+	--nav-text-color: hsla(220, 12%, 85%, 0.822);
+	--nav-link-color: hsl(0, 0%, 100%);
+	--nav-link-hover-color: hsl(140, 45%, 85%);
+	--nav-link-active-color: hsl(140, 55%, 45%);
+	--nav-link-visited-color: hsl(200, 35%, 70%);
+	--nav-height: 40px;
+	/* aside styles */
+	--aside-width: 145px;
+	/* General styles */
+	--background-color: hsl(220, 10%, 10%);
+	--text-color: hsl(220, 12%, 85%);
+	/* Fonts */
+	--title-font: "Montserrat", sans-serif;
+	--body-font: "Poppins", sans-serif;
+	/* Code card styles */
+	--code-card-background-color: hsl(300, 83%, 12%);
+	--code-card-header-background-color: hsl(0, 0%, 27%);
+	--code-card-text-color: hsl(220, 12%, 85%);
+	--border-color: hsl(0, 0%, 0%);
+	--user-text-color: hsl(90.81, 92.5%, 31.37%);
+    /* Nano card colors */
+    --nano-comment-color: hsl(214, 52%, 52%);
+    --nano-echo-color: hsl(214, 52%, 32%);
+    --nano-quotation-marks-color: hsl(29, 86%, 25%);
+    /* Terminal colors */
+    --terminal-background: hsl(0, 0%, 8%);
+    --terminal-header-background: hsl(0, 0%, 15%);
+    --terminal-text: hsl(0, 0%, 85%);
+    --terminal-border: hsl(0, 0%, 25%);
+    --terminal-user: hsl(120, 100%, 40%);
+    --terminal-path: hsl(200, 100%, 60%);
+    --terminal-prompt: hsl(0, 0%, 85%);
+    --terminal-output: hsl(0, 0%, 90%);
+}
+
+/* Body styles */
+body {
+	background-color: var(--background-color);
+	color: var(--text-color);
+	font-family: var(--body-font);
+	margin: 0;
+	padding: 0 1.5rem 70px 1rem; /* Added bottom padding for footer */
+	min-height: 100vh;
+	justify-content: justify;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+	font-family: var(--title-font);
+	font-weight: 600;
+	line-height: 1.2;
+	margin-bottom: 1rem;
+	margin-top: 1rem;
+}
+
+h1 {
+	font-size: 2.5rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+}
+
+p {
+	margin: 0;
+}
+
+
+/* Bash terminal style for commands, paths, and technical terms */
+.bash-term {
+	font-family: 'Ubuntu Mono', monospace;
+	color: var(--terminal-user);
+	background-color: rgba(0, 0, 0, 0.1);
+	padding: 0.1rem 0.3rem;
+	border-radius: 3px;
+	font-size: 0.9em;
+}
+
+.bash-dir {
+	font-family: 'Ubuntu Mono', monospace;
+	color: var(--terminal-path);
+	background-color: rgba(0, 0, 0, 0.1);
+	padding: 0.1rem 0.3rem;
+	border-radius: 3px;
+	font-size: 0.9em;
+}
+
+/* Section styles */
+
+.home-section {
+	margin-left: calc(var(--aside-width) + 5px);
+	margin-top: calc(var(--nav-height) + 15px);
+	padding: 1rem 0 2rem 1rem;
+}
+
+.code-section {
+	margin-left: calc(var(--aside-width) + 5px);
+	margin-top: 1rem;
+	padding: 0 0 1rem 1rem;
+	color: var(--code-card-text-color);
+}
+
+.code-section p {
+	margin: 0 0 0.5rem 0;
+	padding: 0;
+}
+
+/* Desktop Toggle Menu Styles - Only apply on desktop */
+@media (min-width: 769px) {
+	#toggle-menu:not(:checked) ~ .sidebar {
+		transform: translateX(-100%);
+	}
+
+	#toggle-menu:not(:checked) ~ main {
+		margin-left: calc(var(--aside-width) * -1);
+	}
+
+	#toggle-menu:not(:checked) ~ header nav {
+		left: 0;
+		width: calc(100% - 45px);
+	}
+
+	#toggle-menu:not(:checked) ~ footer {
+		width: calc(100% - 10px);
+		left: 0;
+	}
+
+    /* Hide menu toggle on desktop by default */
+    .menu-toggle { display: none; }
+}
+
+/* Contact page styles */
+.contact-section {
+	margin-left: calc(var(--aside-width) + 5px);
+	margin-top: calc(var(--nav-height) + 15px);
+	padding: 1rem 0 2rem 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
+/* Ensure contact section works on desktop */
+@media (min-width: 769px) {
+	.contact-section {
+		margin-left: calc(var(--aside-width) + 5px);
+		width: auto;
+	}
+}
+
+.social-links {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	margin-top: 2rem;
+	max-width: 400px;
+	width: 100%;
+}
+
+.social-links h2 {
+	color: var(--nav-link-color);
+	margin-bottom: 1rem;
+}
+
+.social-link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	padding: 1rem 2rem;
+	background-color: var(--terminal-header-background);
+	border: 2px solid var(--nav-link-color);
+	border-radius: 8px;
+	color: var(--text-color);
+	text-decoration: none;
+	font-family: var(--body-font);
+	font-size: 1.1rem;
+	font-weight: 500;
+	transition: all 0.3s ease;
+}
+
+.social-link:hover {
+	background-color: var(--nav-link-color);
+	color: var(--background-color);
+	transform: translateY(-2px);
+}
+
+/* On hover, turn icons to black */
+.social-link:hover .social-icon { filter: brightness(0); }
+
+.social-icon { width: 1.5rem; height: 1.5rem; filter: brightness(0) invert(1); }
+
+/* Profile picture styles */
+
+.profile-picture-small {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 2px solid var(--nav-link-color);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.profile-picture {
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 4px solid var(--nav-link-color);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+	margin: 2rem auto;
+	display: block;
+}
+
+/* Home page specific styles */
+.hero-section {
+	text-align: center;
+	margin-bottom: 4rem;
+}
+
+.hero-subtitle {
+	font-size: 1.3rem;
+	color: var(--nav-link-color);
+	margin: 1rem 0;
+	font-weight: 500;
+}
+
+.hero-description {
+	font-size: 1.1rem;
+	max-width: 600px;
+	margin: 1.5rem auto;
+	line-height: 1.6;
+}
+
+.learning-section, .quickstart-section, .path-section, .why-section, .cta-section {
+	margin: 3rem 0;
+}
+
+.learning-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 1.5rem;
+	margin: 2rem 0;
+}
+
+.learning-card {
+	background-color: var(--terminal-header-background);
+	padding: 1.5rem;
+	border-radius: 8px;
+	border: 1px solid var(--terminal-border);
+	transition: transform 0.3s ease;
+}
+
+.learning-card:hover {
+	transform: translateY(-5px);
+}
+
+.learning-card h3 {
+	margin-top: 0;
+	color: var(--nav-link-color);
+}
+
+.path-steps {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	margin: 2rem 0;
+}
+
+.path-step {
+	display: flex;
+	align-items: flex-start;
+	gap: 1.5rem;
+	padding: 1.5rem;
+	background-color: var(--terminal-header-background);
+	border-radius: 8px;
+	border-left: 4px solid var(--nav-link-color);
+}
+
+.step-number {
+	background-color: var(--nav-link-color);
+	color: var(--background-color);
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	font-size: 1.2rem;
+	flex-shrink: 0;
+}
+
+.step-content h3 {
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+}
+
+.step-link {
+	color: var(--nav-link-color);
+	text-decoration: none;
+	font-weight: 500;
+	transition: color 0.3s ease;
+}
+
+.step-link:hover {
+	color: var(--nav-link-hover-color);
+}
+
+.why-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 1.5rem;
+	margin: 2rem 0;
+}
+
+.why-item {
+	text-align: center;
+	padding: 1rem;
+}
+
+.why-item h4 {
+	color: var(--nav-link-color);
+	margin-bottom: 0.5rem;
+	font-size: 1.1rem;
+}
+
+.cta-section {
+	text-align: center;
+	margin: 4rem 0;
+	padding: 2rem;
+	background-color: var(--terminal-header-background);
+	border-radius: 12px;
+	border: 1px solid var(--terminal-border);
+}
+
+.cta-buttons {
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+	margin-top: 2rem;
+	flex-wrap: wrap;
+}
+
+.cta-button {
+	padding: 1rem 2rem;
+	border-radius: 8px;
+	text-decoration: none;
+	font-weight: 600;
+	font-size: 1.1rem;
+	transition: all 0.3s ease;
+	display: inline-block;
+}
+
+.cta-button.primary {
+	background-color: var(--nav-link-color);
+	color: var(--background-color);
+	border: 2px solid var(--nav-link-color);
+}
+
+.cta-button.primary:hover {
+	background-color: var(--nav-link-hover-color);
+	border-color: var(--nav-link-hover-color);
+	transform: translateY(-2px);
+}
+
+.cta-button.secondary {
+	background-color: transparent;
+	color: var(--nav-link-color);
+	border: 2px solid var(--nav-link-color);
+}
+
+.cta-button.secondary:hover {
+	background-color: var(--nav-link-color);
+	color: var(--background-color);
+	transform: translateY(-2px);
+}
+
+/* Media Queries for Responsive Design */
+
+/* Tablet styles (768px and below) */
+@media (max-width: 768px) {
+	:root {
+		--nav-height: 60px;
+	}
+
+	/* Reset any desktop overrides */
+	* {
+		box-sizing: border-box;
+	}
+
+	html, body {
+		width: 100vw;
+		max-width: 100vw;
+		overflow-x: hidden;
+	}
+
+	body {
+		padding: 0 1rem 80px 1rem;
+		margin: 0;
+	}
+
+    /* Hide sidebar completely on mobile and tablet */
+    aside.sidebar {
+        transform: translateX(-100%);
+        width: 240px;
+        z-index: 1001;
+        box-shadow: 2px 0 15px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease;
+    }
+
+	/* Show sidebar when menu is toggled */
+	#toggle-menu:checked ~ aside.sidebar {
+		transform: translateX(0);
+	}
+
+	/* Add overlay when menu is open */
+    #toggle-menu:checked ~ aside.sidebar::after {
+		content: '';
+		position: fixed;
+		top: 0;
+        left: 240px;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, 0.5);
+		z-index: -1;
+	}
+
+	/* Adjust main content for mobile - no sidebar offset */
+	.home-section, .contact-section {
+		margin-left: 0;
+		margin-top: calc(var(--nav-height) + 20px);
+		padding: 1rem;
+		width: auto;
+	}
+
+	.code-section {
+		margin-left: 0;
+		padding: 1rem;
+		width: auto;
+	}
+
+	/* Header adjustments for mobile - full width */
+	header nav {
+		left: 0 !important;
+		right: 0 !important;
+		width: 100vw !important;
+		max-width: 100vw !important;
+		min-width: 100vw !important;
+		padding: 0.5rem 1rem;
+		box-sizing: border-box;
+		position: fixed;
+		top: 0;
+		z-index: 1000;
+		margin: 0 !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		transform: translateX(0) !important;
+	}
+
+    /* Mobile menu toggle button */
+    .menu-toggle { display: inline-block !important; color: var(--nav-link-color); background: none; border: 1px solid var(--terminal-border); border-radius: 4px; font-size: 1rem; padding: 0.5rem 1rem; cursor: pointer; position: relative; z-index: 1002; transition: all 0.3s ease; margin-left: auto; }
+    .menu-toggle:hover { background-color: var(--terminal-header-background); color: var(--nav-link-hover-color); }
+    .menu-toggle::before { content: "Sections ▼"; }
+
+	/* Linux logo adjustments for mobile */
+	.linux-logo {
+		width: 2.5rem;
+		height: 2.5rem;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		top: 50%;
+		margin-top: -1.25rem;
+	}
+
+	/* Header navigation - hide by default on mobile */
+header nav ul { display: none; position: absolute; top: 100%; right: 1rem; width: 200px; background-color: var(--nav-background-color); flex-direction: column; padding: 0.5rem; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); border: 1px solid var(--terminal-border); border-radius: 6px; z-index: 999; }
+
+    /* Navigation dropdown visibility is handled inside header via #toggle-sections */
+
+	/* Close button as first item */
+	header nav ul::before {
+		content: "✕ Close";
+		display: block;
+		text-align: center;
+		padding: 0.4rem;
+		color: var(--nav-text-color);
+		font-size: 0.75rem;
+		border-bottom: 1px solid var(--terminal-border);
+		margin-bottom: 0.3rem;
+		cursor: pointer;
+		background-color: var(--terminal-header-background);
+		border-radius: 4px;
+		transition: background-color 0.3s ease;
+		
+	}
+
+	header nav ul::before:hover {
+		background-color: var(--terminal-border);
+	}
+
+	header nav ul li {
+		width: 100%;
+		text-align: center;
+		margin: 0.1rem 0;
+	}
+
+	header nav ul li a {
+		font-size: 0.85rem;
+		padding: 0rem 0.75rem;
+		display: block;
+		width: 100%;
+		color: var(--nav-link-color);
+		text-decoration: none;
+		transition: background-color 0.3s ease;
+		border-radius: 4px;
+	}
+
+	header nav ul li a:hover {
+		background-color: var(--terminal-header-background);
+	}
+
+    /* Menu toggle adjustments */
+    .menu-toggle { font-size: 1rem !important; padding: 0.5rem; z-index: 1002; }
+
+    /* Footer adjustments for mobile */
+    footer {
+		left: 0 !important;
+		right: 0 !important;
+		width: 100vw !important;
+		max-width: 100vw !important;
+		min-width: 100vw !important;
+        padding: 0 1rem;
+		font-size: 0.9rem;
+		box-sizing: border-box;
+		position: fixed;
+		bottom: 0;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+		margin: 0 !important;
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		transform: translateX(0) !important;
+	}
+
+	footer p {
+		font-size: 0.85rem;
+		text-align: center;
+		margin: 0;
+		padding: 0;
+	}
+
+    /* Terminal and nano cards responsive */
+    .terminal-container, .nano-container {
+        width: 96%;
+        max-width: 720px;
+        margin: 0.75rem auto;
+        font-size: 0.85rem;
+    }
+
+	.terminal-content {
+		padding: 0.5rem;
+		min-height: 80px;
+	}
+
+	.nano-editor {
+		padding: 0.3rem;
+		min-height: 80px;
+		font-size: 0.75rem;
+	}
+
+	/* Typography adjustments */
+	h1 {
+		font-size: 2rem;
+	}
+
+	h2 {
+		font-size: 1.3rem;
+	}
+
+	h3 {
+		font-size: 1.1rem;
+	}
+
+	/* Home page responsive adjustments */
+	.profile-picture {
+		width: 200px;
+		height: 200px;
+	}
+
+	.hero-subtitle {
+		font-size: 1.1rem;
+	}
+
+	.hero-description {
+		font-size: 1rem;
+		padding: 0 1rem;
+	}
+
+	.learning-grid {
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+
+	.learning-card {
+		padding: 1rem;
+	}
+
+	.path-step {
+		flex-direction: column;
+		text-align: center;
+		gap: 1rem;
+		padding: 1rem;
+	}
+
+	.step-number {
+		align-self: center;
+	}
+
+	.why-grid {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1rem;
+	}
+
+	.why-item {
+		padding: 0.5rem;
+	}
+
+	.cta-buttons {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.cta-button {
+		width: 100%;
+		max-width: 300px;
+		text-align: center;
+	}
+
+	/* Contact page responsive */
+	.social-links {
+		max-width: 100%;
+		padding: 0 1rem;
+	}
+
+	.social-link {
+		padding: 0.8rem 1rem;
+		font-size: 1rem;
+	}
+}
+
+/* Small mobile styles (480px and below) */
+@media (max-width: 480px) {
+	:root {
+		--nav-height: 55px;
+	}
+
+	body {
+		padding: 0 0.75rem 70px 0.75rem;
+	}
+
+	/* Content sections for small mobile */
+	.home-section, .contact-section {
+		padding: 0.75rem;
+		margin-top: calc(var(--nav-height) + 15px);
+	}
+
+	.code-section {
+		padding: 0.75rem;
+	}
+
+	/* Header for small mobile */
+	header nav {
+		padding: 0.4rem 0.75rem !important;
+		font-size: 1rem;
+		height: var(--nav-height);
+		left: 0 !important;
+		right: 0 !important;
+		width: 100vw !important;
+		max-width: 100vw !important;
+		min-width: 100vw !important;
+		position: fixed;
+		top: 0;
+		z-index: 1000;
+		margin: 0 !important;
+		transform: translateX(0) !important;
+		box-sizing: border-box;
+	}
+
+    .menu-toggle { font-size: 1.1rem; padding: 0.3rem; z-index: 1002; }
+
+	.linux-logo {
+		width: 2rem;
+		height: 2rem;
+		margin-top: -1rem;
+	}
+
+	/* Smaller dropdown for small mobile */
+header nav ul { width: 180px; right: 0.5rem; padding: 0.3rem; }
+
+	header nav ul li a {
+		font-size: 0.8rem;
+		padding: 0.4rem 0.6rem;
+	}
+
+	header nav ul::before {
+		font-size: 0.7rem;
+		padding: 0.3rem;
+	}
+
+    .menu-toggle { font-size: 0.9rem !important; padding: 0.4rem; }
+
+	/* Footer for small mobile */
+	footer {
+		left: 0 !important;
+		right: 0 !important;
+		width: 100vw !important;
+		max-width: 100vw !important;
+		min-width: 100vw !important;
+		padding: 0.4rem 0.75rem !important;
+		font-size: 0.8rem !important;
+		position: fixed;
+		bottom: 0;
+		box-sizing: border-box;
+		margin: 0 !important;
+		transform: translateX(0) !important;
+	}
+
+	footer p {
+		font-size: 0.8rem !important;
+		text-align: center;
+		margin: 0;
+		padding: 0;
+	}
+
+	/* Typography for small screens */
+	h1 {
+		font-size: 1.75rem;
+		line-height: 1.1;
+		margin-bottom: 0.75rem;
+	}
+
+	h2 {
+		font-size: 1.15rem;
+		margin-bottom: 0.75rem;
+	}
+
+	h3 {
+		font-size: 1rem;
+		margin-bottom: 0.5rem;
+	}
+
+	/* Terminal and nano cards for small mobile */
+	.terminal-container, .nano-container {
+		width: 98%;
+		max-width: 640px;
+		font-size: 0.75rem;
+		border-radius: 4px;
+		margin: 0.75rem auto;
+	}
+
+	.terminal-content, .nano-editor {
+		padding: 0.5rem;
+		min-height: 70px;
+	}
+
+	.terminal-header, .nano-header {
+		padding: 0.4rem 0.5rem;
+	}
+
+	.control-btn {
+		width: 10px;
+		height: 10px;
+	}
+
+	.terminal-title, .nano-filename {
+		font-size: 0.7rem;
+	}
+
+	/* Home page for small mobile */
+	.profile-picture {
+		width: 140px;
+		height: 140px;
+		margin: 1rem auto;
+	}
+
+	.hero-subtitle {
+		font-size: 1rem;
+		margin: 0.75rem 0;
+	}
+
+	.hero-description {
+		font-size: 0.9rem;
+		line-height: 1.5;
+		margin: 1rem auto;
+	}
+
+	.learning-section, .quickstart-section, .path-section, .why-section, .cta-section {
+		margin: 2rem 0;
+	}
+
+	.learning-card {
+		padding: 1rem;
+	}
+
+	.learning-card h3 {
+		font-size: 1rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.path-step {
+		padding: 1rem;
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.step-number {
+		width: 35px;
+		height: 35px;
+		font-size: 1rem;
+		margin-bottom: 0.5rem;
+	}
+
+	.why-grid {
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+
+	.why-item {
+		padding: 0.75rem;
+	}
+
+	.cta-section {
+		padding: 1.25rem;
+		margin: 2.5rem 0;
+	}
+
+	.cta-button {
+		padding: 0.75rem 1.25rem;
+		font-size: 0.95rem;
+		margin: 0.25rem 0;
+	}
+
+    /* Sidebar adjustments for small mobile */
+    aside.sidebar {
+        width: 220px;
+    }
+
+    .bash-logo {
+        width: 40px;
+        height: 40px;
+        margin: 10px auto;
+    }
+
+	aside nav ul {
+		padding: 0 0 0 0.75rem;
+		gap: 0.75rem;
+	}
+
+	aside nav ul li a {
+		font-size: 0.85rem;
+		padding: 0.25rem 0;
+	}
+
+	/* Social links for small mobile */
+	.social-link {
+		padding: 0.7rem;
+		font-size: 0.9rem;
+		gap: 0.7rem;
+	}
+
+	.social-icon {
+		width: 1.25rem;
+		height: 1.25rem;
+	}
+
+	/* Bash term styling adjustments */
+	.bash-term, .bash-dir {
+		font-size: 0.8em;
+		padding: 0.1rem 0.25rem;
+	}
+
+	/* Prevent horizontal scroll */
+	* {
+		max-width: 100%;
+		box-sizing: border-box;
+	}
+}

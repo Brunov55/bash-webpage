@@ -1,0 +1,227 @@
+---
+import Header from "../components/header.astro";
+import Footer from "../components/footer.astro";
+import Aside from "../components/aside.astro";
+import CodeCard from "../components/codecard.astro";
+import "../styles/global.css";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:wght@300&display=swap" rel="stylesheet">
+		<title>Essential Commands - Bash Programming</title>
+	</head>
+	<body>
+		<input type="checkbox" id="toggle-menu" hidden>
+		<Header />
+		<Aside />
+		<main>
+			<section class="home-section">
+				<h1>Essential Linux/Bash Commands</h1>
+				<p>This guide covers the most important commands every Linux beginner should know. Each command includes examples and explanations to help you understand what they do.</p>
+				
+				<h2>Navigation Commands</h2>
+				<p>These commands help you move around the file system and see where you are.</p>
+				
+				<h3><span class="bash-term">pwd</span> - Print Working Directory</h3>
+				<p>Shows your current location in the file system. Think of it as "Where am I?"</p>
+				<CodeCard 
+					command={['pwd']}
+					output={['/home/user']}
+				/>
+				
+				<h3><span class="bash-term">ls</span> - List Directory Contents</h3>
+				<p>Shows files and folders in your current directory. Like looking at what's in a folder.</p>
+				<CodeCard 
+					command={['ls', 'ls -l', 'ls -la']}
+					output={['Documents Downloads Pictures Videos', 'total 4\ndrwxr-xr-x 2 user user 4096 Jan 15 10:30 Documents\ndrwxr-xr-x 2 user user 4096 Jan 15 10:30 Downloads', 'total 8\ndrwxr-xr-x 2 user user 4096 Jan 15 10:30 .\ndrwxr-xr-x 3 user user 4096 Jan 15 10:29 ..\ndrwxr-xr-x 2 user user 4096 Jan 15 10:30 Documents']}
+				/>
+				<ul>
+					<li><span class="bash-term">ls</span> - Simple list</li>
+					<li><span class="bash-term">ls -l</span> - Detailed list with permissions, size, date</li>
+					<li><span class="bash-term">ls -la</span> - Show hidden files too (files starting with .)</li>
+				</ul>
+				
+				<h3><span class="bash-term">cd</span> - Change Directory</h3>
+				<p>Move to a different folder. Like double-clicking a folder to open it.</p>
+				<CodeCard 
+					command={['cd Documents', 'pwd', 'cd ..', 'cd ~']}
+					output={['', '/home/user/Documents', '', '']}
+				/>
+				<ul>
+					<li><span class="bash-term">cd Documents</span> - Go into Documents folder</li>
+					<li><span class="bash-term">cd ..</span> - Go up one level (parent directory)</li>
+					<li><span class="bash-term">cd ~</span> - Go to your home directory</li>
+					<li><span class="bash-term">cd /</span> - Go to root directory (top level)</li>
+				</ul>
+				
+				<h2>File Operations</h2>
+				<p>Commands for creating, copying, moving, and deleting files and folders.</p>
+				
+				<h3><span class="bash-term">touch</span> - Create Empty File</h3>
+				<p>Creates a new empty file or updates the timestamp of an existing file.</p>
+				<CodeCard 
+					command={['touch myfile.txt', 'ls']}
+					output={['', 'myfile.txt']}
+				/>
+				
+				<h3><span class="bash-term">mkdir</span> - Make Directory</h3>
+				<p>Creates a new folder.</p>
+				<CodeCard 
+					command={['mkdir newfolder', 'mkdir -p path/to/nested/folder']}
+					output={['', '']}
+				/>
+				<ul>
+					<li><span class="bash-term">mkdir newfolder</span> - Create a single folder</li>
+					<li><span class="bash-term">mkdir -p path/to/folder</span> - Create nested folders (parents too)</li>
+				</ul>
+				
+				<h3><span class="bash-term">cp</span> - Copy Files/Directories</h3>
+				<p>Makes a copy of files or folders.</p>
+				<CodeCard 
+					command={['cp file.txt backup.txt', 'cp -r folder/ backup_folder/']}
+					output={['', '']}
+				/>
+				<ul>
+					<li><span class="bash-term">cp file.txt copy.txt</span> - Copy a file</li>
+					<li><span class="bash-term">cp -r folder/ backup/</span> - Copy a folder and everything inside it</li>
+				</ul>
+				
+				<h3><span class="bash-term">mv</span> - Move/Rename</h3>
+				<p>Moves files/folders to a new location or renames them.</p>
+				<CodeCard 
+					command={['mv oldname.txt newname.txt', 'mv file.txt Documents/']}
+					output={['', '']}
+				/>
+				<ul>
+					<li><span class="bash-term">mv old.txt new.txt</span> - Rename a file</li>
+					<li><span class="bash-term">mv file.txt folder/</span> - Move file to folder</li>
+				</ul>
+				
+				<h3><span class="bash-term">rm</span> - Remove/Delete</h3>
+				<p>Deletes files and folders. <strong>Be careful!</strong> This is permanent.</p>
+				<CodeCard 
+					command={['rm file.txt', 'rm -r folder/', 'rm -rf dangerous_folder/']}
+					output={['', '', '']}
+				/>
+				<ul>
+					<li><span class="bash-term">rm file.txt</span> - Delete a file</li>
+					<li><span class="bash-term">rm -r folder/</span> - Delete a folder and everything inside</li>
+					<li><span class="bash-term">rm -rf folder/</span> - Force delete (no confirmations)</li>
+				</ul>
+				
+				<h2>Viewing File Contents</h2>
+				<p>Commands to read and display what's inside files.</p>
+				
+				<h3><span class="bash-term">cat</span> - Display File Contents</h3>
+				<p>Shows the entire content of a file at once.</p>
+				<CodeCard 
+					command={['cat hello.txt']}
+					output={['Hello, World!\nThis is a text file.']}
+				/>
+				
+				<h3><span class="bash-term">less</span> - View File Page by Page</h3>
+				<p>View large files one screen at a time. Press <span class="bash-term">q</span> to quit.</p>
+				<CodeCard 
+					command={['less largefile.txt']}
+					output={['(opens file in pager - use arrow keys to scroll, q to quit)']}
+				/>
+				
+				<h3><span class="bash-term">head</span> and <span class="bash-term">tail</span> - Show Beginning or End</h3>
+				<p>Show just the first or last few lines of a file.</p>
+				<CodeCard 
+					command={['head -5 file.txt', 'tail -3 file.txt']}
+					output={['Line 1\nLine 2\nLine 3\nLine 4\nLine 5', 'Line 98\nLine 99\nLine 100']}
+				/>
+				
+				<h2>System Information</h2>
+				<p>Commands to learn about your system and what's running.</p>
+				
+				<h3><span class="bash-term">whoami</span> - Current User</h3>
+				<p>Shows your username.</p>
+				<CodeCard 
+					command={['whoami']}
+					output={['user']}
+				/>
+				
+				<h3><span class="bash-term">date</span> - Current Date and Time</h3>
+				<p>Shows the current date and time.</p>
+				<CodeCard 
+					command={['date']}
+					output={['Mon Jan 15 14:30:25 UTC 2024']}
+				/>
+				
+				<h3><span class="bash-term">df</span> - Disk Space</h3>
+				<p>Shows how much disk space is available.</p>
+				<CodeCard 
+					command={['df -h']}
+					output={['Filesystem      Size  Used Avail Use% Mounted on\n/dev/sda1        20G  8.5G   11G  45% /']}
+				/>
+				
+				<h2>Text Processing</h2>
+				<p>Powerful commands for working with text and data.</p>
+				
+				<h3><span class="bash-term">grep</span> - Search Text</h3>
+				<p>Search for specific text inside files.</p>
+				<CodeCard 
+					command={['grep "hello" file.txt', 'grep -i "HELLO" file.txt']}
+					output={['Line with hello in it', 'Line with hello in it\nLine with HELLO in it']}
+				/>
+				<ul>
+					<li><span class="bash-term">grep "word" file.txt</span> - Find lines containing "word"</li>
+					<li><span class="bash-term">grep -i "word" file.txt</span> - Case-insensitive search</li>
+				</ul>
+				
+				<h3><span class="bash-term">echo</span> - Print Text</h3>
+				<p>Display text on screen or save it to a file.</p>
+				<CodeCard 
+					command={['echo "Hello, World!"', 'echo "Text" > file.txt', 'echo "More text" >> file.txt']}
+					output={['Hello, World!', '', '']}
+				/>
+				<ul>
+					<li><span class="bash-term">echo "text"</span> - Print text to screen</li>
+					<li><span class="bash-term">echo "text" > file.txt</span> - Save text to file (overwrites)</li>
+					<li><span class="bash-term">echo "text" >> file.txt</span> - Add text to end of file</li>
+				</ul>
+				
+				<h2>Permissions and Ownership</h2>
+				<p>Control who can read, write, or execute files.</p>
+				
+				<h3><span class="bash-term">chmod</span> - Change Permissions</h3>
+				<p>Change who can read, write, or execute a file.</p>
+				<CodeCard 
+					command={['chmod +x script.sh', 'chmod 755 file.txt']}
+					output={['', '']}
+				/>
+				<ul>
+					<li><span class="bash-term">chmod +x file</span> - Make file executable</li>
+					<li><span class="bash-term">chmod 755 file</span> - Owner: read/write/execute, Others: read/execute</li>
+					<li><span class="bash-term">chmod 644 file</span> - Owner: read/write, Others: read only</li>
+				</ul>
+				
+				<h2>Tips for Beginners</h2>
+				<ul>
+					<li><strong>Tab completion:</strong> Press <span class="bash-term">Tab</span> to auto-complete file/folder names</li>
+					<li><strong>Command history:</strong> Use <span class="bash-term">↑</span> and <span class="bash-term">↓</span> arrows to browse previous commands</li>
+					<li><strong>Clear screen:</strong> Type <span class="bash-term">clear</span> or press <span class="bash-term">Ctrl+L</span></li>
+					<li><strong>Stop command:</strong> Press <span class="bash-term">Ctrl+C</span> to stop a running command</li>
+					<li><strong>Get help:</strong> Type <span class="bash-term">man command</span> to read the manual for any command</li>
+				</ul>
+				
+				<h2>Practice Exercise</h2>
+				<p>Try this step-by-step exercise to practice the basic commands:</p>
+				<CodeCard 
+					command={['pwd', 'mkdir practice', 'cd practice', 'touch hello.txt', 'echo "Hello, Linux!" > hello.txt', 'cat hello.txt', 'ls -l', 'cd ..', 'rm -r practice']}
+					output={['/home/user', '', '', '', '', 'Hello, Linux!', 'total 4\n-rw-r--r-- 1 user user 14 Jan 15 14:30 hello.txt', '', '']}
+				/>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

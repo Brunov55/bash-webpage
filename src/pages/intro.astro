@@ -1,0 +1,52 @@
+---
+import Header from "../components/header.astro";
+import Footer from "../components/footer.astro";
+import Aside from "../components/aside.astro";
+import CodeCard from "../components/codecard.astro";
+import "../styles/global.css";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:wght@300&display=swap" rel="stylesheet">
+		<title>Home - Bash Programming</title>
+	</head>
+	<body>
+		<input type="checkbox" id="toggle-menu" hidden>
+		<Header />
+		<Aside />
+		<main>
+			<section class="home-section">
+				<h1>Introduction</h1>
+				<p>Welcome! This site shares practical notes, examples, and mini-guides for Bash programming so you can move faster in the terminal and automate tasks.</p>
+				<h2>What is Bash?</h2>
+				<p>Bash (<b>B</b>ourne <b>A</b>gain <b>SH</b>ell</b>) is a Unix shell and command language. You type commands; Bash runs them, lets you chain them together, and write scripts to repeat tasks reliably. Bash is a powerful tool that allows you to automate tasks and create scripts to perform complex operations.</p>
+				<h2>Why learn Bash?</h2>
+				<ul>
+					<li>Automate repetitive work (backups, builds, deployments).</li>
+					<li>Glue tools together with pipes and redirection.</li>
+					<li>Process text and files quickly.</li>
+					<li>Script tasks for reproducible results on any Unix-like system.</li>
+				</ul>
+				<h2>How to use Bash?</h2>
+				<p>Bash is a command-line shell: you type a command, press Enter, and Bash runs it. You can chain commands, pass options, and connect programs together—all interactively.</p>
+			</section>
+			<section class="code-section">
+				<h3>Example</h3>
+				<p>The following commands will output the home directory, the current working directory, and a message. <span class="bash-term">pwd</span> stands for "<b>p</b>rint <b>w</b>orking <b>d</b>irectory" and <span class="bash-term">echo</span> is used to print a message.</p>
+				<!-- Codecard for the echo $HOME, pwd, echo Hello, World! commands -->
+				<CodeCard 
+					command={['echo $HOME', 'pwd', 'echo Hello, World!']}
+					output={['/home/User', '/home/User', 'Hello, World!']}
+				/>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
