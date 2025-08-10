@@ -1,6 +1,7 @@
 ---
 import Header from "../components/header.astro";
 import Footer from "../components/footer.astro";
+import Aside from "../components/aside.astro";
 import "../styles/global.css";
 ---
 
@@ -16,8 +17,9 @@ import "../styles/global.css";
 		<title>Contact - Bash Programming</title>
 	</head>
 	<body>
-		<input type="checkbox" id="toggle-menu" hidden>
-		<Header showMenu={false} />
+        <input type="checkbox" id="toggle-menu" hidden>
+        <Header />
+        <Aside />
 		<main>
 			<section class="contact-section">
 				<h1>Contact</h1>
